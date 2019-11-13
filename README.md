@@ -4,8 +4,8 @@ binaryの取り出し
 
 ```sh
 $ id=$(docker create tsmd44/wkhtmltopdf)
-$ docker cp $id:/bin/wkhtmltopdf - > wkhtmltopdf
-$ docker cp $id:/bin/wkhtmltoimage - > wkhtmltoimage
+$ docker cp $id:/bin/wkhtmltopdf wkhtmltopdf
+$ docker cp $id:/bin/wkhtmltoimage wkhtmltoimage
 $ docker rm -v $id
 ```
 
@@ -17,7 +17,7 @@ Multi stage build
 From tsmd44/wkhtmltopdf as wkhtmltopdf
 
 
-From php:7.2-fpm-alpine as base
+From php:7.2-fpm-alpine3.10 as base
 
 COPY --from=wkhtmltopdf /bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
 COPY --from=wkhtmltopdf /bin/wkhtmltoimage /usr/local/bin/wkhtmltoimage

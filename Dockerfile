@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.10 as builder
 
 ENV WKHTMLTOX_VERSION=0.12.5
 ENV REPO=https://github.com/wkhtmltopdf/wkhtmltopdf.git
@@ -166,3 +166,15 @@ RUN make install              \
     && apk del .build-deps
 
 RUN sha256sum /bin/wkhtmltopdf
+
+
+FROM alpine:3.10
+
+RUN apk add --update --no-cache \
+    libgcc libstdc++ libx11 glib libxrender libxext libintl \
+    ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family
+
+COPY --from=builder /bin/wkhtmltopdf /bin/wkhtmltopdf
+COPY --from=builder /bin/wkhtmltoimage /bin/wkhtmltoimage
+
+ENTRYPOINT ["wkhtmltopdf"]
