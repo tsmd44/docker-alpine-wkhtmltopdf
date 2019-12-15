@@ -165,8 +165,6 @@ RUN make install              \
     && rm -rf /tmp/*          \
     && apk del .build-deps
 
-RUN sha256sum /bin/wkhtmltopdf
-
 
 FROM alpine:3.10
 
