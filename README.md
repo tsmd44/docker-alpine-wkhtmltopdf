@@ -24,5 +24,3 @@ COPY --from=wkhtmltopdf /bin/wkhtmltoimage /usr/local/bin/wkhtmltoimage
 
 ...
 ```
-
-hogehoge
