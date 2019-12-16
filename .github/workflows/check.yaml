@@ -1,0 +1,9 @@
+name: Check
+on: pull_request
+jobs:
+  check:
+    name: Status Check
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Set Status as Success
+      run: exit 0

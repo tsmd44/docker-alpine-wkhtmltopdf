@@ -16,3 +16,11 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build Image
       run: echo 'ok!!'
+  check:
+    name: Status Check
+    runs-on: ubuntu-18.04
+    needs: build
+    if: failure()
+    steps:
+    - name: Set Status as Failed
+      run: exit 1
