@@ -15,7 +15,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build Image
-      run: exit 1
+      run: echo 'ok'
   check:
     name: Status Check
     runs-on: ubuntu-18.04
