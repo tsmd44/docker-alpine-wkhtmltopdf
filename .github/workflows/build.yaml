@@ -1,0 +1,26 @@
+name: CI
+on:
+  pull_request:
+    paths:
+    - 'Dockerfile'
+    - 'README.md'
+jobs:
+  build:
+    name: Build Image
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build Image
+      run: echo 'ok'
+  check:
+    name: Status Check
+    runs-on: ubuntu-18.04
+    needs: build
+    if: failure()
+    steps:
+    - name: Set Status as Failed
+      run: exit 1
